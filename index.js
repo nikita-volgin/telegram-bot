@@ -21,9 +21,9 @@ app.post('/', async (req, res) => {
     res.sendStatus(200)
 })
 
-async function sendMessage (chatId, text) {
+async function sendMessage (chatId, message) {
     await axios.post(`https://api.telegram.org/${botToken}/sendMessage`, {
-        chatId,
-        text
+        chat_id: chatId,
+        text: message
     })
 }
