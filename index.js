@@ -13,15 +13,13 @@ app.post('/', async (req, res) => {
 
     if (message === '/start') {
         await sendMessage(chatId, 'welcome to the club, buddy')
-    }
-
-    if (message === 'hi') {
+    } else if (message === 'hi') {
         await sendMessage(chatId, 'wassup, man')
-    } 
-
-    if (message === 'hello') {
+    } else if (message === 'hello') {
         await sendMessage(chatId, 'oh, so official')
-    } else await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
+    } else {
+        await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
+    }
 
     res.sendStatus(200)
 })
