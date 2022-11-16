@@ -7,17 +7,21 @@ const botToken = 'bot5671144029:AAEQ1QSnofMwGLJgnSO_MMBgodG7y52Os9M'
 
 app.use(bodyparser.json())
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log('bot is listening')
-})
-
 app.post('/', async (req, res) => {
     const chatId = req.body.message.chat.id
-    const message = req.body.message.text
+    const message = req.body.message.text.toLowerCase()
 
-    console.log({chatId, message});
+    if (message === '/start') {
+        await sendMessage(chatId, 'welcome to the club, buddy')
+    }
 
-    await sendMessage(chatId, message)
+    if (message === 'hi') {
+        await sendMessage(chatId, 'wassup, man')
+    } 
+
+    if (message === 'hello') {
+        await sendMessage(chatId, 'oh, so official')
+    } else await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
 
     res.sendStatus(200)
 })
@@ -28,3 +32,7 @@ async function sendMessage (chatId, message) {
         text: message
     })
 }
+
+app.listen(process.env.PORT || 8080, () => {
+    console.log('bot is listening')
+})
