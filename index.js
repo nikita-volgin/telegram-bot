@@ -19,6 +19,13 @@ app.post('/', async (req, res) => {
     }
 
     const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
+
+    if (body.message?.new_chat_participant?.username === 'FirstVolginBot') {
+        await sendMessage(chatId, "hello, ma friends")
+
+        res.sendStatus(200)
+        return
+    }
     
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
         body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
