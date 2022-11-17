@@ -17,12 +17,16 @@ app.post('/', async (req, res) => {
         body.message.voice ? "voice messages" :
         body.message.text.toLowerCase()
 
-    if (message === '/start') {
+    if (body.edited_message) {
+        await sendMessage(chatId, message)
+    } else if (message === '/start') {
         await sendMessage(chatId, 'welcome to the club, buddy')
     } else if (message === 'hi') {
         await sendMessage(chatId, 'wassup, man')
     } else if (message === 'hello') {
         await sendMessage(chatId, 'oh, so official')
+    } else if(message === 'how are you?'){
+        await sendMessage(chatId, "i'm fine, thanks")
     } else {
         await sendMessage(chatId, `i don't know what u need, fuck to your "${message}", have a nice day`)
     }
