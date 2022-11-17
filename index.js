@@ -15,18 +15,36 @@ app.post('/', async (req, res) => {
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
         body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
         body.message.voice ? "voice messages" :
-        body.message.text.toLowerCase()
+        body.message.text.toLowerCase().trim()
 
     if (body.edited_message) {
         await sendMessage(chatId, message)
     } else if (message === '/start') {
+
         await sendMessage(chatId, 'welcome to the club, buddy')
-    } else if (message === 'hi') {
-        await sendMessage(chatId, 'wassup, man')
-    } else if (message === 'hello') {
-        await sendMessage(chatId, 'oh, so official')
-    } else if(message === 'how are you?'){
-        await sendMessage(chatId, "i'm fine, thanks")
+
+    } else if (message === '/help') {
+
+        await sendMessage(chatId, "you can use one of this commands:<br/>/poll question ...options(separated by spaces) anon(if you need anonymous poll) - create poll<br/>that's all")
+
+    } else if (message.indexOf('/poll') === 0) {
+
+        const array = message.split(' ')
+        array.shift()
+
+        if (array.length > 3) {
+            await sendMessage(chatId, 'something went wrong')
+        } else {
+
+            const question = array.shift()
+            const anon = array.includes('anon')
+
+            if (anon) array.pop()
+
+            await sendPoll(chatId, question, array, anon)
+
+        }
+
     } else {
         await sendMessage(chatId, `i don't know what u need, fuck to your "${message}", have a nice day`)
     }
@@ -34,10 +52,19 @@ app.post('/', async (req, res) => {
     res.sendStatus(200)
 })
 
-async function sendMessage (chatId, message) {
+async function sendMessage(chatId, message) {
     await axios.post(`https://api.telegram.org/${botToken}/sendMessage`, {
         chat_id: chatId,
-        text: message
+        text: message,
+    })
+}
+
+async function sendPoll(chatId, question, options, is_anonymous) {
+    await axios.post(`https://api.telegram.org/${botToken}/sendPoll`, {
+        chat_id: chatId,
+        question,
+        options,
+        is_anonymous,
     })
 }
 
