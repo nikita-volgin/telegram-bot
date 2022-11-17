@@ -10,7 +10,7 @@ app.use(bodyparser.json())
 app.post('/', async (req, res) => {
     const body = req.body
     
-    console.log(body.edited_message);
+    console.log(body);
 
     const chatId = body.message ? body.message.chat.id : body.edited_message?.chat.id
 
