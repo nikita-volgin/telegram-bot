@@ -21,7 +21,14 @@ app.post('/', async (req, res) => {
     const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
 
     if (body.message?.new_chat_participant?.username === 'FirstVolginBot') {
-        await sendMessage('791669874', "hello, ma friends")
+        await sendMessage(chatId, "hello, ma friends")
+
+        res.sendStatus(200)
+        return
+    }
+
+    if (body.message?.left_chat_member?.username === 'FirstVolginBot') {
+        await sendMessage('791669874', `owner, i was kicked out of the group ${body.message.chat.title}`)
 
         res.sendStatus(200)
         return
