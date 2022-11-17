@@ -10,21 +10,19 @@ app.use(bodyparser.json())
 app.post('/', async (req, res) => {
     const chatId = req.body.message.chat.id
 
-    const message = req.body.message.sticker ? req.body.message.sticker.emoji :
-        req.body.message.voice ? "i don't inderstand voice messages" :
+    const message = req.body.message.sticker ? `sticker ${req.body.message.sticker.emoji}` :
+        req.body.message.voice ? "voice messages" :
         req.body.message.text
 
-    await sendMessage(chatId, message)
-
-    // if (message === '/start') {
-    //     await sendMessage(chatId, 'welcome to the club, buddy')
-    // } else if (message === 'hi') {
-    //     await sendMessage(chatId, 'wassup, man')
-    // } else if (message === 'hello') {
-    //     await sendMessage(chatId, 'oh, so official')
-    // } else {
-    //     await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
-    // }
+    if (message === '/start') {
+        await sendMessage(chatId, 'welcome to the club, buddy')
+    } else if (message === 'hi') {
+        await sendMessage(chatId, 'wassup, man')
+    } else if (message === 'hello') {
+        await sendMessage(chatId, 'oh, so official')
+    } else {
+        await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
+    }
 
     res.sendStatus(200)
 })
