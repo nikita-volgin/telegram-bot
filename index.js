@@ -35,23 +35,23 @@ app.post('/', async (req, res) => {
 
     } else if (message === '/help') {
 
-        await sendMessage(chatId, "you can use one of this commands:\n/poll-question-...options(separated by spaces)-anon(if you need anonymous poll) - create poll\nthat's all")
+        await sendMessage(chatId, "you can use one of this commands:\n/poll question(if more than one word separate by '-') options(separate by '-') anon(if you need anonymous poll) - create poll\nthat's all")
 
     } else if (message.indexOf('/poll') === 0) {
 
-        const array = message.split('-')
+        const array = message.split(' ')
         array.shift()
 
         if (array.length > 3) {
             await sendMessage(chatId, 'something went wrong')
         } else {
 
-            const question = array.shift()
+            const question = array.shift().split('-').join()
             const anon = array.includes('anon')
 
             if (anon) array.pop()
 
-            await sendPoll(chatId, question, array, anon)
+            await sendPoll(chatId, question, array[0].split('-'), anon)
 
         }
 
