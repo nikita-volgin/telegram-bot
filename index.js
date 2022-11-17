@@ -9,17 +9,20 @@ app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
     const chatId = req.body.message.chat.id
-    const message = req.body.message.text.toLowerCase()
+    // const message = req.body.message.text.toLowerCase()
+    const message = req.body.message.content_type
 
-    if (message === '/start') {
-        await sendMessage(chatId, 'welcome to the club, buddy')
-    } else if (message === 'hi') {
-        await sendMessage(chatId, 'wassup, man')
-    } else if (message === 'hello') {
-        await sendMessage(chatId, 'oh, so official')
-    } else {
-        await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
-    }
+    await sendMessage(chatId, message)
+
+    // if (message === '/start') {
+    //     await sendMessage(chatId, 'welcome to the club, buddy')
+    // } else if (message === 'hi') {
+    //     await sendMessage(chatId, 'wassup, man')
+    // } else if (message === 'hello') {
+    //     await sendMessage(chatId, 'oh, so official')
+    // } else {
+    //     await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
+    // }
 
     res.sendStatus(200)
 })
