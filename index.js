@@ -8,7 +8,7 @@ const botToken = 'bot5671144029:AAEQ1QSnofMwGLJgnSO_MMBgodG7y52Os9M'
 app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
-    const chatId = req.body.message.chat ? req.body.message.chat.id : '791669874'
+    const chatId = req.body.message ? req.body.message.chat.id : '791669874'
 
     const message = JSON.parse(req.body.message)
 
