@@ -11,7 +11,7 @@ app.post('/', async (req, res) => {
     const body = req.body
 
     console.log(body);
-    if (body.message?.poll || body.poll) {
+    if (body.message?.poll || body.poll || body.poll_answer) {
         await sendMessage('791669874', "i don't know what to do with this information")
 
         res.sendStatus(200)
