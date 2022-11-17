@@ -12,6 +12,8 @@ app.post('/', async (req, res) => {
 
     const chatId = '791669874'
 
+    console.log(req.body.edited_message)
+
     const message = JSON.parse(req.body.edited_message)
 
     await sendMessage(chatId, message)
