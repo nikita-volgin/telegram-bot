@@ -8,11 +8,13 @@ const botToken = 'bot5671144029:AAEQ1QSnofMwGLJgnSO_MMBgodG7y52Os9M'
 app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
-    const chatId = req.body.message ? req.body.message.chat.id : '791669874'
+    //const chatId = req.body.message ? req.body.message.chat.id : '791669874'
 
-    const message = JSON.parse(req.body)
+    const chatId = '791669874'
 
-    await sendMessage(chatId, 'message')
+    const message = JSON.parse(req.body.edited_message)
+
+    await sendMessage(chatId, message)
 
     // const message = req.body.message.sticker ? `sticker ${req.body.message.sticker.emoji}` :
     //     req.body.message.voice ? "voice messages" :
