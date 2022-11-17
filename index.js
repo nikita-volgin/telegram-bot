@@ -9,8 +9,10 @@ app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
     const chatId = req.body.message.chat.id
-    // const message = req.body.message.text.toLowerCase()
-    const message = JSON.stringify(req.body)
+
+    const message = req.body.message.sticker ? req.body.message.sticker.emoji :
+        req.body.message.voice ? "i don't inderstand voice messages" :
+        req.body.message.text
 
     await sendMessage(chatId, message)
 
