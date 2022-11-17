@@ -46,7 +46,7 @@ app.post('/', async (req, res) => {
             await sendMessage(chatId, 'something went wrong')
         } else {
 
-            const question = array.shift().split('-').join()
+            const question = array.shift().split('-').join(' ')
             const anon = array.includes('anon')
 
             if (anon) array.pop()
