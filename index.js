@@ -12,7 +12,7 @@ app.post('/', async (req, res) => {
 
     const message = req.body.message.sticker ? `sticker ${req.body.message.sticker.emoji}` :
         req.body.message.voice ? "voice messages" :
-        req.body.message.text
+        req.body.message.text.toLowerCase()
 
     if (message === '/start') {
         await sendMessage(chatId, 'welcome to the club, buddy')
