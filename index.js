@@ -21,7 +21,7 @@ app.post('/', async (req, res) => {
     const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
 
     if (body.message?.new_chat_participant?.username === 'FirstVolginBot') {
-        await sendMessage(chatId, "hello, ma friends")
+        await sendMessage('791669874', "hello, ma friends")
 
         res.sendStatus(200)
         return
