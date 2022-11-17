@@ -13,7 +13,9 @@ app.post('/', async (req, res) => {
     console.log(body);
     if (body.poll) {
         await sendMessage('791669874', "i don't know what to do with this information")
+
         res.sendStatus(200)
+        return
     }
 
     const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
