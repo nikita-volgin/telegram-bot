@@ -10,7 +10,7 @@ app.use(bodyparser.json())
 app.post('/', async (req, res) => {
     const chatId = req.body.message.chat.id
     // const message = req.body.message.text.toLowerCase()
-    const message = req.body.message.content_type
+    const message = JSON.stringify(req.body)
 
     await sendMessage(chatId, message)
 
