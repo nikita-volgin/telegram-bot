@@ -9,8 +9,10 @@ app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
     const body = req.body
+    
+    console.log(body.edited_message);
 
-    const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
+    const chatId = body.message ? body.message.chat.id : body.edited_message?.chat.id
 
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
         body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
@@ -25,11 +27,11 @@ app.post('/', async (req, res) => {
 
     } else if (message === '/help') {
 
-        await sendMessage(chatId, "you can use one of this commands:<br/>/poll question ...options(separated by spaces) anon(if you need anonymous poll) - create poll<br/>that's all")
+        await sendMessage(chatId, "you can use one of this commands:\n/poll-question-...options(separated by spaces)-anon(if you need anonymous poll) - create poll\nthat's all")
 
     } else if (message.indexOf('/poll') === 0) {
 
-        const array = message.split(' ')
+        const array = message.split('-')
         array.shift()
 
         if (array.length > 3) {
@@ -65,6 +67,7 @@ async function sendPoll(chatId, question, options, is_anonymous) {
         question,
         options,
         is_anonymous,
+        parse_mode: 'HTML'
     })
 }
 
