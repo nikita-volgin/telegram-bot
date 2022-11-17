@@ -8,29 +8,24 @@ const botToken = 'bot5671144029:AAEQ1QSnofMwGLJgnSO_MMBgodG7y52Os9M'
 app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
-    //const chatId = req.body.message ? req.body.message.chat.id : '791669874'
+    const body = req.body
 
-    const chatId = '791669874'
+    const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
 
-    console.log(req.body.edited_message)
+    const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
+        body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
+        body.message.voice ? "voice messages" :
+        body.message.text.toLowerCase()
 
-    const message = JSON.parse(req.body.edited_message)
-
-    await sendMessage(chatId, message)
-
-    // const message = req.body.message.sticker ? `sticker ${req.body.message.sticker.emoji}` :
-    //     req.body.message.voice ? "voice messages" :
-    //     req.body.message.text.toLowerCase()
-
-    // if (message === '/start') {
-    //     await sendMessage(chatId, 'welcome to the club, buddy')
-    // } else if (message === 'hi') {
-    //     await sendMessage(chatId, 'wassup, man')
-    // } else if (message === 'hello') {
-    //     await sendMessage(chatId, 'oh, so official')
-    // } else {
-    //     await sendMessage(chatId, `i don't know what u need, fuck to your '${message}', have a nice day`)
-    // }
+    if (message === '/start') {
+        await sendMessage(chatId, 'welcome to the club, buddy')
+    } else if (message === 'hi') {
+        await sendMessage(chatId, 'wassup, man')
+    } else if (message === 'hello') {
+        await sendMessage(chatId, 'oh, so official')
+    } else {
+        await sendMessage(chatId, `i don't know what u need, fuck to your "${message}", have a nice day`)
+    }
 
     res.sendStatus(200)
 })
