@@ -9,13 +9,14 @@ app.use(bodyparser.json())
 
 app.post('/', async (req, res) => {
     const body = req.body
-    const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
 
     console.log(body);
     if (body.poll) {
-        await sendMessage(chatId, "i don't know what to do with this information")
+        await sendMessage('791669874', "i don't know what to do with this information")
         res.sendStatus(200)
     }
+
+    const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
     
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
         body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
