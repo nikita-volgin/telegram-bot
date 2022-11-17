@@ -11,6 +11,7 @@ app.post('/', async (req, res) => {
     const body = req.body
     const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
 
+    console.log(body);
     if (body.poll) {
         await sendMessage(chatId, "i don't know what to do with this information")
         res.sendStatus(200)
