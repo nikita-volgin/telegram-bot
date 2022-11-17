@@ -10,7 +10,7 @@ app.use(bodyparser.json())
 app.post('/', async (req, res) => {
     const chatId = req.body.message ? req.body.message.chat.id : '791669874'
 
-    const message = JSON.parse(req.body.message)
+    const message = JSON.parse(req.body)
 
     await sendMessage(chatId, 'message')
 
