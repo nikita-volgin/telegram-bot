@@ -56,7 +56,7 @@ app.post('/', async (req, res) => {
         const array = message.split(' ')
         array.shift()
 
-        if (array.length > 3) {
+        if (array.length < 2) {
             await sendMessage(chatId, 'something went wrong')
         } else {
 
