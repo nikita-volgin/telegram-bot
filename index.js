@@ -56,14 +56,14 @@ app.post('/', async (req, res) => {
         const array = message.split(' ')
         array.shift()
 
+        const anon = array.indexOf('anon') === array.length -  1
+        if (anon) array.pop()
+
         if (array.length < 2) {
             await sendMessage(chatId, 'something went wrong')
         } else {
 
             const question = array.shift().split('-').join(' ')
-            const anon = array.includes('anon')
-
-            if (anon) array.pop()
 
             const options = array[0].split('-')
 
