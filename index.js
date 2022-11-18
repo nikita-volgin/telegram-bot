@@ -67,9 +67,9 @@ app.post('/', async (req, res) => {
 
             const options = array[0].split('-')
 
-            if (options < 2) {
-                await sendMessage(chatId, 'options must be at least 2, use /help')
-            } else await sendPoll(chatId, question, array[0].split('-'), anon)
+            if (options.length < 2) {
+                await sendMessage(chatId, 'poll must have at least 2 option, use /help')
+            } else await sendPoll(chatId, question, options, anon)
 
         }
 
