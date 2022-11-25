@@ -41,7 +41,7 @@ app.post('/', async (req, res) => {
     }
 
     if (body.message.chat?.type === 'group') {
-        await sendMessage('chatId', "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞")
+        await sendMessage(chatId, "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞")
 
     }
     
