@@ -34,16 +34,20 @@ app.post('/', async (req, res) => {
     }
 
     if (body.message?.left_chat_member?.username === 'FirstVolginBot') {
-        await sendMessage('791669874', `owner, i was kicked out of the group ${body.message.chat.title}`)
+        await sendMessage('791669874', "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞")
 
         res.sendStatus(200)
         return
+    }
+
+    if {body.message.chat?.type === 'group'} {
+        await sendMessage(chatId, `welcome, ${body.message.new_chat_participant.username}`)
+
     }
     
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
         body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
         body.message.voice ? 'voice messages' :
-        body.message.chat?.type === 'group' ? "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞" :
         body.message.text.toLowerCase().trim()
 
     if (body.edited_message) {
