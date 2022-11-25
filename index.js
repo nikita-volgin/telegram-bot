@@ -40,7 +40,7 @@ app.post('/', async (req, res) => {
         return
     }
 
-    if {body.message.chat?.type === 'group'} {
+    if (body.message.chat?.type === 'group') {
         await sendMessage(chatId, `welcome, ${body.message.new_chat_participant.username}`)
 
     }
