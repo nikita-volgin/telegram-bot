@@ -11,6 +11,7 @@ app.post('/', async (req, res) => {
     const body = req.body
 
     console.log(body);
+
     if (body.message?.poll || body.poll || body.poll_answer || body.my_chat_member) {
         await sendMessage('791669874', "i don't know what to do with this information")
 
@@ -20,8 +21,15 @@ app.post('/', async (req, res) => {
 
     const chatId = body.message ? body.message.chat.id : body.edited_message.chat.id
 
+    console.log(body.message.new_chat_participant.username)
+
     if (body.message?.new_chat_participant?.username === 'FirstVolginBot' || body.message?.group_chat_created) {
         await sendMessage(chatId, "hello, ma friends")
+
+        res.sendStatus(200)
+        return
+    }  else if (body.message?.new_chat_participant?.username) {
+        await sendMessage(chatId, `welcome, ${body.message.new_chat_participant.username}`)
 
         res.sendStatus(200)
         return
