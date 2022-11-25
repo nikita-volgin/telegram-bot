@@ -42,7 +42,9 @@ app.post('/', async (req, res) => {
 
     if (body.message.chat?.type === 'group') {
         await sendMessage(chatId, "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞")
-
+        
+        res.sendStatus(200)
+        return
     }
     
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
