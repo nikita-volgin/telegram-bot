@@ -42,7 +42,8 @@ app.post('/', async (req, res) => {
     
     const message = body.edited_message ? `this is a joke? why did u changed the message to "${body.edited_message.text}"` : 
         body.message.sticker ? `sticker ${body.message.sticker.emoji}` :
-        body.message.voice ? "voice messages" :
+        body.message.voice ? 'voice messages' :
+        body.message.chat?.type === 'group' ? "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞" :
         body.message.text.toLowerCase().trim()
 
     if (body.edited_message) {
