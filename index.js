@@ -34,14 +34,14 @@ app.post('/', async (req, res) => {
     }
 
     if (body.message?.left_chat_member?.username === 'FirstVolginBot') {
-        await sendMessage('791669874', "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞")
+        await sendMessage(chatId, `welcome, ${body.message.new_chat_participant.username}`)
 
         res.sendStatus(200)
         return
     }
 
     if (body.message.chat?.type === 'group') {
-        await sendMessage(chatId, `welcome, ${body.message.new_chat_participant.username}`)
+        await sendMessage('791669874', "oh, i don't know what to do, i can't read your message in this group. My creator is trying to fix this 😞")
 
     }
     
